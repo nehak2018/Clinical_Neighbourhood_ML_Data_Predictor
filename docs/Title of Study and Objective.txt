@@ -1,0 +1,25 @@
+The hybrid framework combines survey-based observed prevalence estimation with machine learning–based prediction and forecasting at the neighborhood level.
+
+
+How to Explain This to Reviewers
+🔹 Descriptive Part
+
+Calculates observed weighted prevalence
+
+Represents the real population
+
+No prediction involved
+
+🔹 ML Part
+
+Uses neighborhood characteristics
+
+Learns patterns
+
+Produces:
+
+Stable estimates
+
+Predictions for low-sample areas
+
+Future forecasts
