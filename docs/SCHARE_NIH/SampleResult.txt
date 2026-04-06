@@ -1,0 +1,73 @@
+Available_Dataset_at SCHARE: 
+
+	environmental - 
+		Daily_PM2.5_County_2001-2019
+		Daily_County_Ozone_2001-2019
+		PDSI_Palmer_Drought_Severity_1895-2016
+		SPI_Standardized_Precipitation_1895-2016
+		LATCH_HouseHold_2009
+		GHI_Global_Horizontal_Irradiance_1991-2012
+	Heathcare Access
+		2021MedicalConditionsData
+	Economic	
+		AHS_National_Household_2015
+
+	Disease
+		Diseases and Conditions
+		NOHSS_Adult_Indicators
+
+
+----------------------------------------------------------------------------
+Later, you can aggregate daily PM2.5 to yearly averages per county
+
+Then map to ZIPs using a ZIP→County crosswalk (Census provides this)
+What a County FIPS code is
+
+FIPS stands for Federal Information Processing Standard.
+
+It’s a unique numeric code assigned to every county in the U.S.
+
+Used by government agencies for standardized geographic identification.
+
+Works for:
+
+Counties
+
+County equivalents (independent cities, parishes, boroughs)
+
+
+
+
+-------------------------------------------------------------------
+geo_id: 17031010100
+geo_type: CensusTract
+year: 2023
+population: 4,120
+
+avg_pm25: 14.1
+avg_no2: 19.4
+avg_temperature: 72
+avg_humidity: 61
+green_space_pct: 18
+
+housing_density: 3,050
+median_building_age: 52
+walkability_index: 64
+food_access_score: 0.42
+
+median_income: 47,500
+poverty_rate: 21
+education_bachelors_pct: 28
+insurance_coverage_pct: 88
+
+primary_care_per_10k: 6.2
+dermatologist_per_10k: 0.9
+endocrinologist_per_10k: 0.6
+
+eczema_cases: 350
+eczema_prevalence: 0.085
+eczema_risk_category: High
+
+diabetes_cases: 520
+diabetes_prevalence: 0.126
+diabetes_risk_category: High

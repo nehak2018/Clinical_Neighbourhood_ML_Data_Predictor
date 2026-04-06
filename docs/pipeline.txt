@@ -1,0 +1,50 @@
+                    ┌──────────────────────────┐
+                    │      SURVEY DATA         │
+                    │ (Disease status + weight)│
+                    └─────────────┬────────────┘
+                                  │
+                                  ▼
+                    ┌──────────────────────────┐
+                    │  Compute Weighted        │
+                    │  Neighborhood Prevalence │
+                    │  (Observed Estimate)     │
+                    └─────────────┬────────────┘
+                                  │
+                     ─────────────┼─────────────
+                      DESCRIPTIVE │ COMPONENT
+                     ─────────────┼─────────────
+                                  │
+                                  ▼
+                    ┌──────────────────────────┐
+                    │  Observed Neighborhood   │
+                    │  Prevalence (Baseline)   │
+                    └─────────────┬────────────┘
+                                  │
+                                  ▼
+        ┌────────────────────────────────────────────────┐
+        │ Merge With Neighborhood-Level Features         │
+        │ • Demographics                                 │
+        │ • Socioeconomic indicators                     │
+        │ • Environmental exposures                      │
+        └─────────────┬──────────────────────────────────┘
+                      │
+                      ▼
+            ──────────┼──────────
+               MACHINE LEARNING
+                COMPONENT
+            ──────────┼──────────
+                      │
+                      ▼
+        ┌────────────────────────────────────────┐
+        │ Train ML Model (e.g., XGBoost)        │
+        │ Learn patterns between features       │
+        │ and observed prevalence               │
+        └─────────────┬─────────────────────────┘
+                      │
+                      ▼
+        ┌────────────────────────────────────────┐
+        │ Outputs:                               │
+        │ • Predicted current prevalence         │
+        │ • Stabilized small-area estimates      │
+        │ • Forecasted future prevalence         │
+        └────────────────────────────────────────┘
