@@ -1,0 +1,69 @@
+
+
+# =========================
+# 📊 Step 7: Yearly Aggregation (County Level)
+# =========================
+hedis_yearly = (
+    hedis.groupby(["year", "statefips", "countyfips"])
+    .agg(
+        population=("population", "sum"),
+        observed=("observed", "sum"),
+        o_e_ratio=("o_e_ratio", "mean"),
+        crude_rate=("crude_rate", "mean"),
+        adjusted_rate=("adjusted_rate", "mean"),
+        std_error=("std_error", "mean"),
+        uppercl=("uppercl", "mean"),
+        lowercl=("lowercl", "mean")
+    )
+    .reset_index()
+)
+
+
+# =========================
+# 👀 Step 8: Preview Final Dataset
+# =========================
+print("Yearly HEDIS Dataset:")
+display(hedis_yearly.head(10))
+
+
+# =========================
+# 📊 Step 9: Validation
+# =========================
+print("Shape:", hedis_yearly.shape)
+print(hedis_yearly.info())
+
+
+# =========================
+# ⚠️ Step 10: Missing Values Check
+# =========================
+print("\nMissing values:")
+print(hedis_yearly.isnull().sum())
+
+
+# =========================
+# 💾 Step 11: Save Output
+# =========================
+OUTPUT_DIR = BASE_DIR / "data" / "processed"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+hedis_yearly.to_csv(
+    OUTPUT_DIR / "hedis_yearly.csv",
+    index=False
+)
+
+print("Saved to:")
+print(OUTPUT_DIR / "hedis_yearly.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
