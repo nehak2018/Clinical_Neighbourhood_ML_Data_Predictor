@@ -1,0 +1,116 @@
+# =========================
+# 📦 Step 1: Imports
+# =========================
+import pandas as pd
+from pathlib import Path
+
+
+# =========================
+# 📂 Step 2: Load Data
+# =========================
+BASE_DIR = Path().resolve().parent
+DATA_PATH = BASE_DIR / "data" / "dataset" / "nhanes_demo.csv"
+
+df = pd.read_csv(DATA_PATH)
+
+print("Raw Data Preview:")
+display(df.head(10))
+
+
+# =========================
+# 🧹 Step 3: Standardize Column Names
+# =========================
+df.columns = df.columns.str.upper()
+
+
+# =========================
+# ⚠️ Step 4: Handle Missing Codes
+# =========================
+# NHANES commonly uses 7, 9 for missing/refused/don't know
+df = df.replace({7: pd.NA, 9: pd.NA})
+
+
+# =========================
+# 🧠 Step 5: Recode Variables
+# =========================
+
+# Gender
+gender_map = {
+    1: "Male",
+    2: "Female"
+}
+df["gender"] = df["RIAGENDR"].map(gender_map)
+
+
+# Race / Ethnicity
+race_map = {
+    1: "Mexican American",
+    2: "Other Hispanic",
+    3: "Non-Hispanic White",
+    4: "Non-Hispanic Black",
+    5: "Other Race"
+}
+df["race"] = df["RIDRETH1"].map(race_map)
+
+
+# Education (for adults)
+edu_map = {
+    1: "< 9th grade",
+    2: "9-11th grade",
+    3: "High school / GED",
+    4: "Some college / AA",
+    5: "College graduate or above"
+}
+df["education"] = df["DMDEDUC2"].map(edu_map)
+
+
+# =========================
+# 📊 Step 6: Select Clean Columns
+# =========================
+df_clean = df[
+    [
+        "SEQN",       # unique person ID
+        "RIDAGEYR",   # age
+        "gender",
+        "race",
+        "education"
+    ]
+]
+
+df_clean = df_clean.rename(columns={
+    "RIDAGEYR": "age"
+})
+
+
+print("Cleaned Data Preview:")
+display(df_clean.head(10))
+
+
+# =========================
+# 📊 Step 7: Validation
+# =========================
+print("Shape:", df_clean.shape)
+print("\nMissing values:\n", df_clean.isnull().sum())
+
+
+# =========================
+# 🧠 Step 8: (Optional) ML Encoding
+# =========================
+df_ml = pd.get_dummies(df_clean, columns=["gender", "race", "education"], drop_first=True)
+
+print("ML-ready Data Preview:")
+display(df_ml.head(10))
+
+
+# =========================
+# 💾 Step 9: Save Outputs
+# =========================
+OUTPUT_DIR = BASE_DIR / "data" / "processed"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+df_clean.to_csv(OUTPUT_DIR / "nhanes_demographics_clean.csv", index=False)
+df_ml.to_csv(OUTPUT_DIR / "nhanes_demographics_ml.csv", index=False)
+
+print("Saved files:")
+print(OUTPUT_DIR / "nhanes_demographics_clean.csv")
+print(OUTPUT_DIR / "nhanes_demographics_ml.csv")
